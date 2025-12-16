@@ -1,0 +1,403 @@
+/* ====================================
+   PROFESSIONAL ANIMATION SYSTEM
+   For Engineering Portfolio
+   ==================================== */
+
+/* ====================================
+   MOTION VARIABLES & FOUNDATIONS
+   ==================================== */
+
+:root {
+    /* Timing Functions - Engineered Easing */
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+    --ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1);
+    
+    /* Duration Scale */
+    --duration-micro: 150ms;
+    --duration-short: 250ms;
+    --duration-medium: 500ms;
+    --duration-long: 800ms;
+    --duration-section: 900ms;
+    
+    /* Motion Distances */
+    --translate-subtle: 8px;
+    --translate-medium: 16px;
+    --translate-large: 24px;
+    
+    /* Opacity Levels */
+    --opacity-hidden: 0;
+    --opacity-muted: 0.4;
+    --opacity-visible: 1;
+}
+
+/* ====================================
+   ACCESSIBILITY - RESPECT USER PREFERENCES
+   ==================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .animate-on-scroll {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+/* ====================================
+   1. TEXTUAL ANIMATIONS
+   ==================================== */
+
+/* A. Progressive Clarification */
+.text-clarify {
+    opacity: var(--opacity-muted);
+    filter: blur(0.5px);
+    transition: 
+        opacity var(--duration-long) var(--ease-out-expo),
+        filter var(--duration-long) var(--ease-out-expo);
+}
+
+.text-clarify.revealed {
+    opacity: var(--opacity-visible);
+    filter: blur(0);
+}
+
+/* B. Semantic Emphasis Reveal */
+.text-emphasis {
+    position: relative;
+    display: inline-block;
+}
+
+.text-emphasis .emphasis-word {
+    opacity: var(--opacity-muted);
+    transform: translateY(2px);
+    transition: 
+        opacity var(--duration-medium) var(--ease-out-quart),
+        transform var(--duration-medium) var(--ease-out-quart);
+    transition-delay: var(--delay, 0ms);
+}
+
+.text-emphasis.revealed .emphasis-word {
+    opacity: var(--opacity-visible);
+    transform: translateY(0);
+}
+
+/* C. Phrase-Based Reveal */
+.text-phrase-reveal {
+    overflow: hidden;
+}
+
+.text-phrase-reveal .phrase {
+    opacity: var(--opacity-hidden);
+    transform: translateY(var(--translate-medium));
+    transition: 
+        opacity var(--duration-medium) var(--ease-out-expo),
+        transform var(--duration-medium) var(--ease-out-expo);
+    transition-delay: var(--delay, 0ms);
+}
+
+.text-phrase-reveal.revealed .phrase {
+    opacity: var(--opacity-visible);
+    transform: translateY(0);
+}
+
+/* D. Abstract-to-Clear Transform - Enhanced Alien Decoding */
+.text-decode {
+    position: relative;
+    overflow: visible;
+    /* Fix height to prevent layout shifts during transformation */
+    min-height: 6.4rem; /* Fixed height for 2 lines at 2rem font-size with 1.6 line-height */
+    background: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    white-space: normal;
+    line-height: 1.6;
+    font-size: inherit;
+    font-weight: inherit;
+    font-family: inherit;
+    /* Ensure consistent text wrapping */
+    word-wrap: break-word;
+    hyphens: none;
+}
+
+/* Initial alien text styling - SAME SIZE as final text */
+.text-decode .decode-char {
+    font-family: 'JetBrains Mono', monospace;
+    color: #06b6d4;
+    letter-spacing: 0.05em; /* Reduced letter spacing */
+    text-shadow: 0 0 6px rgba(6, 182, 212, 0.6);
+    font-size: inherit; /* SAME SIZE as parent to prevent layout shift */
+    font-weight: inherit; /* SAME WEIGHT as parent */
+    line-height: inherit;
+    /* Prevent any size changes */
+    display: inline;
+    vertical-align: baseline;
+}
+
+/* Character-by-character transformation - no size changes */
+.decode-char {
+    display: inline;
+    position: relative;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    /* Maintain consistent sizing throughout */
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+}
+
+.decode-char.transforming {
+    color: #06b6d4;
+    text-shadow: 0 0 8px rgba(6, 182, 212, 0.8);
+    /* NO size or weight changes to prevent layout shift */
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.decode-char.transformed {
+    color: inherit;
+    text-shadow: none;
+    font-size: inherit; /* Keep same size */
+    font-weight: inherit; /* Keep same weight */
+    font-family: inherit; /* Use the original font family */
+}
+
+@keyframes char-glow {
+    0% {
+        color: #06b6d4;
+        text-shadow: 0 0 8px rgba(6, 182, 212, 0.8);
+        /* NO transform or size changes to prevent layout shift */
+    }
+    50% {
+        color: #67e8f9;
+        text-shadow: 0 0 12px rgba(6, 182, 212, 1);
+        /* NO transform or size changes */
+    }
+    100% {
+        color: inherit;
+        text-shadow: none;
+        /* NO transform or size changes */
+    }
+}
+
+/* Background scanning effect */
+@keyframes decode-background {
+    0% {
+        background-position: -200% 0;
+    }
+    30% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+        background: none;
+    }
+}
+
+/* ====================================
+   2. COMPONENT-LEVEL ANIMATIONS
+   ==================================== */
+
+/* A. Section Entry */
+.section-enter {
+    opacity: var(--opacity-hidden);
+    transform: translateY(var(--translate-large));
+    transition: 
+        opacity var(--duration-section) var(--ease-out-expo),
+        transform var(--duration-section) var(--ease-out-expo);
+}
+
+.section-enter.revealed {
+    opacity: var(--opacity-visible);
+    transform: translateY(0);
+}
+
+/* B. Panel / Card Reveal */
+.panel-reveal {
+    opacity: var(--opacity-hidden);
+    transform: translateY(var(--translate-medium));
+    transition: 
+        opacity var(--duration-medium) var(--ease-out-quart),
+        transform var(--duration-medium) var(--ease-out-quart);
+    transition-delay: var(--delay, 0ms);
+}
+
+.panel-reveal.revealed {
+    opacity: var(--opacity-visible);
+    transform: translateY(0);
+}
+
+/* C. Expand / Collapse */
+.expandable {
+    overflow: hidden;
+    transition: max-height var(--duration-medium) var(--ease-out-quart);
+}
+
+.expandable.collapsed {
+    max-height: 0;
+}
+
+.expandable.expanded {
+    max-height: var(--max-height, 1000px);
+}
+
+/* D. Hover Feedback */
+.hover-lift {
+    transition: 
+        transform var(--duration-short) var(--ease-out-quart),
+        box-shadow var(--duration-short) var(--ease-out-quart);
+}
+
+.hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.3);
+}
+
+.hover-emphasis {
+    position: relative;
+    transition: color var(--duration-short) var(--ease-out-quart);
+}
+
+.hover-emphasis::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width var(--duration-short) var(--ease-out-quart);
+}
+
+.hover-emphasis:hover::after {
+    width: 100%;
+}
+
+/* ====================================
+   3. STRUCTURE & ARCHITECTURE ANIMATIONS
+   ==================================== */
+
+.architecture-reveal {
+    opacity: var(--opacity-hidden);
+    transform: scale(0.95);
+    transition: 
+        opacity var(--duration-medium) var(--ease-out-expo),
+        transform var(--duration-medium) var(--ease-out-expo);
+    transition-delay: var(--delay, 0ms);
+}
+
+.architecture-reveal.revealed {
+    opacity: var(--opacity-visible);
+    transform: scale(1);
+}
+
+.connection-line {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    transition: stroke-dashoffset var(--duration-long) var(--ease-out-expo);
+    transition-delay: var(--delay, 0ms);
+}
+
+.connection-line.revealed {
+    stroke-dashoffset: 0;
+}
+
+/* ====================================
+   4. SPECIALIZED ANIMATIONS
+   ==================================== */
+
+/* Staggered Children */
+.stagger-children > * {
+    opacity: var(--opacity-hidden);
+    transform: translateY(var(--translate-subtle));
+    transition: 
+        opacity var(--duration-medium) var(--ease-out-quart),
+        transform var(--duration-medium) var(--ease-out-quart);
+}
+
+.stagger-children.revealed > *:nth-child(1) { transition-delay: 0ms; }
+.stagger-children.revealed > *:nth-child(2) { transition-delay: 100ms; }
+.stagger-children.revealed > *:nth-child(3) { transition-delay: 200ms; }
+.stagger-children.revealed > *:nth-child(4) { transition-delay: 300ms; }
+.stagger-children.revealed > *:nth-child(5) { transition-delay: 400ms; }
+.stagger-children.revealed > *:nth-child(6) { transition-delay: 500ms; }
+
+.stagger-children.revealed > * {
+    opacity: var(--opacity-visible);
+    transform: translateY(0);
+}
+
+/* Fade Through */
+.fade-through {
+    opacity: var(--opacity-visible);
+    transition: opacity var(--duration-short) var(--ease-out-quart);
+}
+
+.fade-through.transitioning {
+    opacity: var(--opacity-muted);
+}
+
+/* ====================================
+   5. UTILITY CLASSES
+   ==================================== */
+
+/* Animation States */
+.animate-on-scroll {
+    opacity: var(--opacity-hidden);
+    transform: translateY(var(--translate-medium));
+}
+
+.animate-on-scroll.revealed {
+    opacity: var(--opacity-visible);
+    transform: translateY(0);
+    transition: 
+        opacity var(--duration-medium) var(--ease-out-expo),
+        transform var(--duration-medium) var(--ease-out-expo);
+}
+
+/* Delay Utilities */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+/* Performance Optimizations */
+.will-animate {
+    will-change: transform, opacity;
+}
+
+.animation-complete {
+    will-change: auto;
+}
+
+/* ====================================
+   6. LOADING STATES
+   ==================================== */
+
+.skeleton-loading {
+    background: linear-gradient(90deg, 
+        rgba(51, 65, 85, 0.3) 25%, 
+        rgba(71, 85, 105, 0.3) 50%, 
+        rgba(51, 65, 85, 0.3) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s infinite;
+}
+
+@keyframes skeleton-shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.skeleton-loading.loaded {
+    animation: none;
+    background: none;
+}

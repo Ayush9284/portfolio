@@ -1,0 +1,651 @@
+/* Premium Portfolio CSS - Engineering Design System */
+
+/* Enhanced Typography System */
+* {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 140px; /* Position section headings right below nav bar */
+}
+
+/* Improved Typography Hierarchy */
+body {
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'pnum' 1, 'tnum' 0, 'onum' 1, 'lnum' 0, 'dlig' 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Enhanced Paragraph Styling - Balanced modern typography */
+p {
+    font-family: 'Inter', 'Rajdhani', system-ui, sans-serif;
+    font-weight: 450;
+    line-height: 1.75;
+    letter-spacing: 0.005em;
+    color: #e2e8f0;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+}
+
+/* Large paragraph text (hero descriptions, section intros) */
+.text-xl p,
+.text-2xl p,
+p.text-xl,
+p.text-2xl {
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: -0.025em;
+    color: #f1f5f9;
+    font-size: 1.25rem;
+}
+
+/* Medium paragraph text */
+.text-lg p,
+p.text-lg {
+    font-weight: 475;
+    line-height: 1.7;
+    letter-spacing: -0.02em;
+    color: #e2e8f0;
+    font-size: 1.125rem;
+}
+
+/* Small paragraph text */
+.text-sm p,
+p.text-sm {
+    font-weight: 450;
+    line-height: 1.65;
+    letter-spacing: -0.01em;
+    color: #cbd5e1;
+}
+
+/* Section descriptions and capability text - Balanced modern */
+.capability-text,
+.section-description {
+    font-family: 'Rajdhani', 'Inter', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+    color: #f1f5f9;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+}
+
+/* Hero subtitle styling - Balanced modern look */
+.hero-subtitle {
+    font-family: 'Exo 2', 'Inter', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 2rem; /* Increased from 1.75rem to 2rem */
+    line-height: 1.6;
+    letter-spacing: 0.015em;
+    color: #f8fafc;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+    word-spacing: normal;
+    white-space: normal;
+}
+
+/* Custom Scrollbar - Minimal Design */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
+
+/* Work Item Styling - Document-like Layout */
+.work-item {
+    background: rgba(30, 41, 59, 0.3);
+    border: 1px solid rgba(51, 65, 85, 0.5);
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.work-item:hover {
+    border-color: rgba(6, 182, 212, 0.7); /* Bright cyan border */
+    background: rgba(51, 65, 85, 0.6); /* Much brighter background */
+    box-shadow: 0 8px 32px -8px rgba(6, 182, 212, 0.15); /* Cyan glow */
+    transform: translateY(-2px); /* Subtle lift effect */
+}
+
+.work-item.expanded {
+    border-color: rgba(6, 182, 212, 0.3);
+}
+
+/* Work Item Header */
+.work-header {
+    padding: 2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.work-header:hover .expand-indicator {
+    color: #06b6d4;
+}
+
+/* Expandable Content */
+.work-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+.work-content.expanded {
+    max-height: 1500px;
+    opacity: 1;
+}
+
+/* Architecture Visualization */
+.architecture-grid {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border: 1px solid rgba(51, 65, 85, 0.5);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.architecture-grid::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.architecture-component {
+    background: rgba(51, 65, 85, 0.4);
+    border: 1px solid rgba(71, 85, 105, 0.6);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #cbd5e1;
+    transition: all 0.2s ease;
+}
+
+.architecture-component:hover {
+    background: rgba(51, 65, 85, 0.6);
+    border-color: rgba(6, 182, 212, 0.4);
+    color: #06b6d4;
+}
+
+/* Technology Stack Badges */
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tech-badge {
+    background: rgba(6, 182, 212, 0.1);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+    color: #67e8f9;
+    padding: 0.375rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.2s ease;
+}
+
+.tech-badge:hover {
+    background: rgba(6, 182, 212, 0.15);
+    border-color: rgba(6, 182, 212, 0.4);
+    transform: translateY(-1px);
+}
+
+/* Engineering Decisions List */
+.decisions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.decision-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding-left: 0;
+}
+
+.decision-item::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: #10b981;
+    border-radius: 50%;
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+    flex-shrink: 0;
+}
+
+/* Highlight Badges */
+.highlight-badge {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    color: #6ee7b7;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Section Reveal Animation */
+.section-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Expand Indicator Animation */
+.expand-indicator {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.expanded .expand-indicator {
+    transform: rotate(180deg);
+}
+
+/* Focus States - Accessibility */
+a:focus,
+button:focus {
+    outline: 2px solid #06b6d4;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .work-header {
+        padding: 1.5rem;
+    }
+    
+    .work-content {
+        padding: 0 1.5rem 1.5rem;
+    }
+    
+    .architecture-grid {
+        min-height: 200px;
+    }
+    
+    .tech-stack {
+        gap: 0.375rem;
+    }
+    
+    .tech-badge {
+        font-size: 0.8125rem;
+        padding: 0.25rem 0.5rem;
+    }
+}
+
+/* Subtle Grid Background */
+.grid-background {
+    background-image: 
+        linear-gradient(to right, rgba(30, 41, 59, 0.5) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(30, 41, 59, 0.5) 1px, transparent 1px);
+    background-size: 4rem 4rem;
+}
+
+/* Loading States */
+.loading-skeleton {
+    background: linear-gradient(90deg, 
+        rgba(51, 65, 85, 0.3) 25%, 
+        rgba(71, 85, 105, 0.3) 50%, 
+        rgba(51, 65, 85, 0.3) 75%
+    );
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Status Indicator */
+.status-indicator {
+    position: relative;
+}
+
+.status-indicator::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #06b6d4;
+    border-radius: 50%;
+    animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.1);
+    }
+}
+
+/* Prose Styling for Philosophy Section */
+.prose-custom {
+    line-height: 1.7;
+}
+
+.prose-custom p {
+    margin-bottom: 1.5rem;
+}
+
+.prose-custom p:last-child {
+    margin-bottom: 0;
+}
+
+/* Enhanced Name Styling */
+.name-gradient {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.name-accent {
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 50%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Methodology Phase Interactions - Fixed Layout Shift */
+.methodology-phase {
+    position: relative;
+    z-index: 1;
+}
+
+.methodology-phase > div {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.methodology-phase:hover {
+    z-index: 10;
+}
+
+.methodology-phase:hover > div {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 5px 10px -5px rgba(0, 0, 0, 0.1);
+}
+
+.methodology-phase.active {
+    z-index: 20;
+}
+
+.methodology-phase.active > div {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* Phase Details Animation - No Layout Shift */
+.phase-details {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(15, 23, 42, 0.98);
+    border: 1px solid rgba(51, 65, 85, 0.8);
+    border-radius: 12px;
+    margin-top: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.methodology-phase:hover .phase-details,
+.methodology-phase.active .phase-details {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Methodology Container - Prevent Layout Shift */
+.methodology-phase-container {
+    position: relative;
+    min-height: 200px; /* Reserve space for expanded content */
+}
+
+/* Enhanced Phase Details Styling */
+.phase-details h5 {
+    border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+}
+
+.phase-details ul li {
+    transition: all 0.2s ease;
+}
+
+.phase-details ul li:hover {
+    transform: translateX(4px);
+    color: #e2e8f0;
+}
+
+/* Methodology Metrics Animation */
+.methodology-phase:hover + * .text-3xl,
+.methodology-phase.active + * .text-3xl {
+    animation: countUp 0.6s ease-out;
+}
+
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Enhanced Grid Background */
+.grid-background-enhanced {
+    background-image: 
+        linear-gradient(to right, rgba(30, 41, 59, 0.4) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(30, 41, 59, 0.4) 1px, transparent 1px);
+    background-size: 2rem 2rem;
+}
+
+/* Floating Animation for Background Elements */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.float-animation {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Enhanced Status Indicator */
+.status-enhanced {
+    position: relative;
+}
+
+.status-enhanced::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    border-radius: inherit;
+    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+    75%, 100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* Methodology Flow Arrows */
+.flow-arrow {
+    transition: all 0.3s ease;
+}
+
+.methodology-phase:hover ~ .flow-arrow svg,
+.methodology-phase.active ~ .flow-arrow svg {
+    color: #06b6d4;
+    transform: translateX(4px);
+}
+
+/* Interactive Hover States */
+.methodology-phase:hover {
+    z-index: 10;
+}
+
+/* Mobile Methodology Adjustments */
+@media (max-width: 1024px) {
+    .methodology-phase {
+        margin-bottom: 2rem;
+    }
+    
+    .phase-details {
+        max-height: none !important;
+        overflow: visible;
+    }
+    
+    .methodology-phase > div {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+}
+
+/* LeetCode Section Styling */
+.leetcode-stat-card {
+    background: rgba(51, 65, 85, 0.3);
+    border: 1px solid rgba(71, 85, 105, 0.5);
+    transition: all 0.3s ease;
+}
+
+.leetcode-stat-card:hover {
+    background: rgba(51, 65, 85, 0.5);
+    border-color: rgba(251, 146, 60, 0.4);
+    transform: translateY(-2px);
+}
+
+/* LeetCode Badge Animation */
+.leetcode-badge {
+    background: rgba(251, 146, 60, 0.1);
+    border: 1px solid rgba(251, 146, 60, 0.2);
+    color: #fb923c;
+    transition: all 0.2s ease;
+}
+
+.leetcode-badge:hover {
+    background: rgba(251, 146, 60, 0.15);
+    border-color: rgba(251, 146, 60, 0.4);
+    transform: scale(1.05);
+}
+
+/* Number Animation */
+.animate-number {
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.animate-number.counting {
+    color: #06b6d4;
+    transform: scale(1.1);
+}
+
+/* Problem Solving Steps */
+.problem-step {
+    transition: all 0.3s ease;
+}
+
+.problem-step:hover {
+    transform: translateX(4px);
+}
+
+.problem-step:hover .step-number {
+    background: rgba(6, 182, 212, 0.2);
+    border-color: rgba(6, 182, 212, 0.4);
+}
+
+/* LeetCode Profile Link Enhancement */
+.leetcode-profile-link {
+    position: relative;
+    overflow: hidden;
+}
+
+.leetcode-profile-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(251, 146, 60, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.leetcode-profile-link:hover::before {
+    left: 100%;
+}/* F
+uturistic Text Effects */
+.futuristic-glow {
+    text-shadow: 
+        0 0 5px rgba(6, 182, 212, 0.5),
+        0 0 10px rgba(6, 182, 212, 0.3),
+        0 0 15px rgba(6, 182, 212, 0.2);
+}
+
+.cyber-text {
+    font-family: 'Orbitron', 'Exo 2', monospace;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Subtle tech styling for specific sections */
+.tech-description {
+    font-family: 'Rajdhani', 'Inter', system-ui, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.7;
+    color: #cbd5e1;
+}
